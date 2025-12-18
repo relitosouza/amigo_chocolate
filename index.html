@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteio "Amigo" Chocolate Finanças</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Sorteio "Amigo" <span>Chocolate</span> Finanças</h1>
+    </header>
+
+    <main class="container">
+        <section class="draw-panel">
+            <div class="winner-display-container">
+                <div id="current-display" class="mode-winner">Aguardando arquivo...</div>
+            </div>
+            <div id="progress-bar" class="progress-bar"></div>
+            
+            <button id="btn-draw" class="btn-sortear" disabled>SORTEAR NOME</button>
+        </section>
+
+        <aside class="sidebar-panel">
+            <div class="history-content">
+                <h2>🎉 Lista de Sorteados</h2>
+                <ul id="winners-list" class="winners-list">
+                    </ul>
+            </div>
+
+            <div class="upload-footer">
+                <div class="upload-area">
+                    <label for="file-upload" class="custom-file-upload">
+                        📂 Carregar/Trocar Arquivo (.txt)
+                    </label>
+                    <input id="file-upload" type="file" accept=".txt"/>
+                    <div id="file-status" class="status-text">Aguardando arquivo...</div>
+                    <div id="count-status" class="status-text"></div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

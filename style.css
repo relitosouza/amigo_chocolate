@@ -1,0 +1,294 @@
+/* --- UX/UI: Paleta de Cores e Tipografia --- */
+:root {
+    --primary-chocolate: #4e342e;
+    --secondary-gold: #c5a059;
+    --bg-color: #f5f5f7;
+    --card-bg: #ffffff;
+    --text-color: #2c3e50;
+    --success: #27ae60;
+    --danger: #c0392b;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- Header --- */
+header {
+    background: var(--primary-chocolate);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+header h1 { font-size: 1.5rem; letter-spacing: 1px; }
+header span { color: var(--secondary-gold); font-weight: bold; }
+
+/* --- Layout Principal --- */
+.container {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 1rem;
+    padding: 1rem;
+    flex: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    height: calc(100vh - 80px);
+}
+
+/* --- Painel de Sorteio (Esquerda) --- */
+.draw-panel {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    height: 100%;
+    position: relative;
+}
+/* NOVA PROPRIEDADE: Indica que é clicável */
+    cursor: pointer; 
+    transition: background-color 0.3s;
+}
+
+/* Efeito visual ao passar o mouse para reforçar que pode clicar */
+.draw-panel:hover {
+    background-color: #fffdf5; /* Um tom muito sutil de creme */
+}
+/* Área do Display Central */
+.winner-display-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+#current-display {
+    font-weight: 800;
+    color: var(--primary-chocolate);
+    transition: all 0.3s ease;
+    max-width: 800px;
+}
+/* --- style.css (Atualizado) --- */
+
+/* ... Mantenha todo o CSS anterior (root, body, header, container, etc) até a linha do #current-display ... */
+
+/* Coloque isso APÓS o #current-display e ANTES do .btn-sortear */
+
+#current-display {
+    font-weight: 800;
+    color: var(--primary-chocolate);
+    transition: all 0.3s ease;
+    max-width: 800px;
+    /* Garante que o texto fique centrado e não pule */
+    margin: 0 auto; 
+}
+
+/* Estilo para o NOME do ganhador */
+.mode-winner {
+    font-size: 3.5rem;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: popIn 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- NOVA CONFIGURAÇÃO DE FRASES --- */
+.mode-phrase {
+    font-size: 1.8rem;
+    font-style: italic;
+    color: #555;
+    line-height: 1.5;
+    
+    /* Estado inicial: Invisível e levemente deslocado para baixo */
+    opacity: 0; 
+    transform: translateY(40px); 
+    
+    /* Transição suave de 0.8 segundos */
+    transition: opacity 1.5s ease-in-out, transform 1.5s ease-out;
+}
+
+/* Classe auxiliar para fazer o texto aparecer */
+.mode-phrase.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes popIn {
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ... Mantenha o resto do CSS (btn-sortear, progress-bar, sidebar, etc) ... */
+
+/* Estilo para o NOME do ganhador */
+.mode-winner {
+    font-size: 3.5rem;
+    opacity: 0;
+    transform: scale(0.5);
+    animation: popIn 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Estilo para as FRASES */
+.mode-phrase {
+    font-size: 1.8rem;
+    font-style: italic;
+    color: #555;
+    line-height: 1.4;
+    opacity: 0;
+    animation: fadeInOut 3.8s infinite; 
+}
+
+@keyframes popIn {
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+.btn-sortear {
+    background: linear-gradient(135deg, var(--primary-chocolate), #3e2723);
+    color: white;
+    border: none;
+    padding: 20px 60px;
+    font-size: 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(78, 52, 46, 0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 2rem;
+}
+
+.btn-sortear:disabled {
+    background: #95a5a6;
+    cursor: wait;
+    box-shadow: none;
+}
+
+.btn-sortear:active { transform: scale(0.95); }
+
+/* Barra de Progresso */
+.progress-bar {
+    height: 4px;
+    background: var(--secondary-gold);
+    width: 0%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transition: width 0.1s linear;
+}
+
+/* --- Painel Lateral (Direita) --- */
+.sidebar-panel {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+.history-content {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    border-bottom: 1px dashed #ddd;
+}
+
+.history-content h2 {
+    font-size: 1.2rem;
+    color: var(--primary-chocolate);
+    margin-bottom: 15px;
+    position: sticky;
+    top: 0;
+    background: white;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary-gold);
+}
+
+.winners-list { list-style: none; }
+
+.winner-item {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    animation: slideIn 0.4s ease-out;
+}
+
+.winner-item.has-trophy {
+    font-weight: bold;
+    color: var(--primary-chocolate);
+    background-color: #fff8e1;
+    border-radius: 6px;
+}
+
+.winner-item.has-trophy::before {
+    content: '🏆';
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.winner-item:not(.has-trophy)::before {
+    content: ''; 
+    display: inline-block;
+    width: 25px;
+}
+
+.upload-footer { flex-shrink: 0; padding-top: 1rem; }
+.upload-area { width: 100%; text-align: center; }
+input[type="file"] { display: none; }
+
+.custom-file-upload {
+    border: 1px dashed var(--secondary-gold);
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    color: #666;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    background: #fafafa;
+}
+
+.custom-file-upload:hover {
+    background-color: #fff8e1;
+    color: var(--primary-chocolate);
+    border-color: var(--primary-chocolate);
+}
+
+.status-text { margin-top: 8px; font-size: 0.8rem; color: #888; }
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@media (max-width: 900px) {
+    .container { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; height: auto; overflow-y: auto; }
+    body { overflow-y: auto; height: auto; }
+    .sidebar-panel { height: 500px; }
+    .mode-phrase { font-size: 1.2rem; }
+}
+
