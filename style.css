@@ -81,25 +81,32 @@ header span { color: var(--secondary-gold); font-weight: bold; }
 #current-display {
     font-weight: 800;
     color: var(--primary-chocolate);
-    max-width: 800px;
+    max-width: 1000px; /* Aumentei a largura máxima */
     margin: 0 auto;
-    /* Remover transições lentas para a roleta ser ágil */
+    line-height: 1.1; /* Linhas mais próximas para nomes longos não espaçarem muito */
+    text-shadow: 2px 2px 0px #fff; /* Leve sombra para destacar do fundo */
 }
 
-/* Estilo para o NOME FINAL (Ganhador) */
+/* Estilo para o NOME FINAL (Ganhador) - AGORA GIGANTE */
 .mode-winner {
-    font-size: 3.5rem;
+    font-size: 8rem; /* Aprox. 128px - Bem grande em 1080p */
     opacity: 0;
     transform: scale(0.5);
     animation: popIn 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: var(--primary-chocolate);
 }
 
-/* Estilo para a ROLETA (Nomes passando rápido) */
+/* Estilo para a ROLETA (Nomes passando) - AGORA GIGANTE */
 .mode-roulette {
-    font-size: 2.5rem; /* Um pouco menor que o ganhador final */
-    opacity: 0.7;      /* Um pouco mais transparente */
-    color: #888;
+    font-size: 6rem;   /* Aprox. 96px */
+    opacity: 0.5;      /* Transparência para dar efeito de movimento */
+    color: #a1887f;    /* Um marrom mais claro */
     transform: scale(1);
+}
+/* Responsividade para telas menores (caso abra no notebook depois) */
+@media (max-width: 900px) {
+    .mode-winner { font-size: 4rem; }
+    .mode-roulette { font-size: 3rem; }
 }
 
 @keyframes popIn {
@@ -233,3 +240,4 @@ input[type="file"] { display: none; }
     body { overflow-y: auto; height: auto; }
     .sidebar-panel { height: 500px; }
 }
+
