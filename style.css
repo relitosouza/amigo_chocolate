@@ -1,4 +1,5 @@
-/* --- UX/UI: Paleta de Cores e Tipografia --- */
+/* --- style.css (Versão Roleta) --- */
+
 :root {
     --primary-chocolate: #4e342e;
     --secondary-gold: #c5a059;
@@ -59,16 +60,14 @@ header span { color: var(--secondary-gold); font-weight: bold; }
     text-align: center;
     height: 100%;
     position: relative;
-}
-/* NOVA PROPRIEDADE: Indica que é clicável */
-    cursor: pointer; 
+    cursor: pointer; /* Mãozinha para indicar clique */
     transition: background-color 0.3s;
 }
 
-/* Efeito visual ao passar o mouse para reforçar que pode clicar */
 .draw-panel:hover {
-    background-color: #fffdf5; /* Um tom muito sutil de creme */
+    background-color: #fffdf5;
 }
+
 /* Área do Display Central */
 .winner-display-container {
     flex: 1;
@@ -82,25 +81,12 @@ header span { color: var(--secondary-gold); font-weight: bold; }
 #current-display {
     font-weight: 800;
     color: var(--primary-chocolate);
-    transition: all 0.3s ease;
     max-width: 800px;
-}
-/* --- style.css (Atualizado) --- */
-
-/* ... Mantenha todo o CSS anterior (root, body, header, container, etc) até a linha do #current-display ... */
-
-/* Coloque isso APÓS o #current-display e ANTES do .btn-sortear */
-
-#current-display {
-    font-weight: 800;
-    color: var(--primary-chocolate);
-    transition: all 0.3s ease;
-    max-width: 800px;
-    /* Garante que o texto fique centrado e não pule */
-    margin: 0 auto; 
+    margin: 0 auto;
+    /* Remover transições lentas para a roleta ser ágil */
 }
 
-/* Estilo para o NOME do ganhador */
+/* Estilo para o NOME FINAL (Ganhador) */
 .mode-winner {
     font-size: 3.5rem;
     opacity: 0;
@@ -108,60 +94,16 @@ header span { color: var(--secondary-gold); font-weight: bold; }
     animation: popIn 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* --- NOVA CONFIGURAÇÃO DE FRASES --- */
-.mode-phrase {
-    font-size: 1.8rem;
-    font-style: italic;
-    color: #555;
-    line-height: 1.5;
-    
-    /* Estado inicial: Invisível e levemente deslocado para baixo */
-    opacity: 0; 
-    transform: translateY(40px); 
-    
-    /* Transição suave de 0.8 segundos */
-    transition: opacity 1.5s ease-in-out, transform 1.5s ease-out;
-}
-
-/* Classe auxiliar para fazer o texto aparecer */
-.mode-phrase.visible {
-    opacity: 1;
-    transform: translateY(0);
+/* Estilo para a ROLETA (Nomes passando rápido) */
+.mode-roulette {
+    font-size: 2.5rem; /* Um pouco menor que o ganhador final */
+    opacity: 0.7;      /* Um pouco mais transparente */
+    color: #888;
+    transform: scale(1);
 }
 
 @keyframes popIn {
     to { opacity: 1; transform: scale(1); }
-}
-
-/* ... Mantenha o resto do CSS (btn-sortear, progress-bar, sidebar, etc) ... */
-
-/* Estilo para o NOME do ganhador */
-.mode-winner {
-    font-size: 3.5rem;
-    opacity: 0;
-    transform: scale(0.5);
-    animation: popIn 0.5s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Estilo para as FRASES */
-.mode-phrase {
-    font-size: 1.8rem;
-    font-style: italic;
-    color: #555;
-    line-height: 1.4;
-    opacity: 0;
-    animation: fadeInOut 3.8s infinite; 
-}
-
-@keyframes popIn {
-    to { opacity: 1; transform: scale(1); }
-}
-
-@keyframes fadeInOut {
-    0% { opacity: 0; transform: translateY(10px); }
-    10% { opacity: 1; transform: translateY(0); }
-    90% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-10px); }
 }
 
 .btn-sortear {
@@ -175,11 +117,12 @@ header span { color: var(--secondary-gold); font-weight: bold; }
     box-shadow: 0 4px 15px rgba(78, 52, 46, 0.4);
     transition: transform 0.2s, box-shadow 0.2s;
     margin-bottom: 2rem;
+    z-index: 10; /* Garante que fique sobre a barra de progresso */
 }
 
 .btn-sortear:disabled {
     background: #95a5a6;
-    cursor: wait;
+    cursor: default;
     box-shadow: none;
 }
 
@@ -289,6 +232,4 @@ input[type="file"] { display: none; }
     .container { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; height: auto; overflow-y: auto; }
     body { overflow-y: auto; height: auto; }
     .sidebar-panel { height: 500px; }
-    .mode-phrase { font-size: 1.2rem; }
 }
-
