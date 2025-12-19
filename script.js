@@ -175,3 +175,22 @@ function resetUI() {
     btnDraw.textContent = "SORTEAR NOME";
     btnDraw.style.background = ""; 
 }
+/* --- script.js (Adicione isso no FINAL do arquivo) --- */
+
+// --- 4. Controle via Teclado (Tecla ENTER) ---
+document.addEventListener('keydown', (event) => {
+    // Verifica se a tecla pressionada foi o ENTER
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Evita comportamentos padrões do navegador
+
+        if (isAnimating) {
+            // Se estiver rodando, o Enter funciona como "Parar Agora"
+            stopRouletteAndShowWinner();
+        } else {
+            // Se estiver parado e o botão estiver ativo, o Enter funciona como "Sortear"
+            if (!btnDraw.disabled) {
+                btnDraw.click();
+            }
+        }
+    }
+});
